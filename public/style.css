@@ -1,0 +1,67 @@
+html {
+    width: 60%;
+    height: 100%;
+    min-height: 100%;
+    margin: 0 auto;
+    font-size: 16px;
+    background-color: #FFFFFF;
+}
+body {
+    height: 100%;
+    min-height: 100%;
+    line-height: 1.75;
+    background-color: #FFFFFF;
+}
+a:link:hover {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    text-decoration: underline;
+    cursor: pointer;
+    cursor: hand;
+}
+input[type=submit], button {
+    cursor: pointer;
+    cursor: hand;
+}
+h4 {text-align: center;}
+h5 {text-align: center;}
+.tableFixHead          { overflow-y: auto; height: 200px; }
+.tableFixHead2         { overflow-y: auto; height: 200px; }
+.tableFixHead3         { overflow-y: auto; height: 200px; }
+.tableFixHead4         { overflow-y: auto; height: 200px; }
+.tableFixHead thead th { position: sticky; top: 0; }
+.tableFixHead2 thead th { position: sticky; top: 0; }
+.tableFixHead3 thead th { position: sticky; top: 0; }
+.tableFixHead4 thead th { position: sticky; top: 0; }
+.container {
+    width: 500px;
+    clear: both;
+}
+  
+.container input {
+    width: 100%;
+    clear: both;
+}
+table  { border-collapse: collapse; width: 100%; }
+th, td { padding: 8px 16px; text-align: center;overflow-wrap:break-word;}
+th     { background:#eee; }
+
+@media(max-width: 900px) {
+    html {
+        font-size: 14px !important;
+        width: 80% !important;
+    }
+}
+@media(max-width: 480px) {
+    html {
+        font-size: 12px !important;
+        width: 90% !important;
+    }
+}
+@media(max-width: 320px) {
+    html {
+        font-size: 12px !important;
+        width: 100% !important;
+    }
+}

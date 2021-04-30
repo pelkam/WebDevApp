@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>GPS Data Viewer</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CHANGE ME">
+    <meta name="keywords" content="CHANGE ME">
+    <meta name="author" content="Martin Pelka">
+    <!-- Load jquery, bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <!-- Custom CSS End -->
+</head>
+<body>
+    <h5>GPS Data Viewer</h5><br>
+    <h4>File Log panel</h4>
+    <div class ="tableFixHead"id ="tableFixHead">
+        <table class="table"id="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">File name(click to download)</th>
+                <th scope="col">Version</th>
+                <th scope="col">Creator</th>
+                <th scope="col">Number of waypoints</th>
+                <th scope="col">Number of routes</th>
+                <th scope="col">Number of tracks</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr id = 'temp'><td>No files</td></tr>
+            </tbody>
+        </table>
+    </div><br>
+    <form ref='uploadForm'
+        class = 'uploadForm'
+		id='uploadForm'
+      action='/upload'
+      method='post'
+      encType="multipart/form-data">
+      <div class="form-group" id = "div1">
+      	<input type="file" name="uploadFile" id = 'file'class="btn btn-secondary">
+      	<input type='submit' value='Upload' id = 'Upload' class="btn btn-secondary">
+      </div>
+    </form>
+    <div class="Spacing">
+        <h5></h5>
+    </div>
+    <label for="gpx files">Choose a file to display:</label>
+    <select name="gpx files" id="gpxFiles">
+        <option value="temp">--Select File--</option>
+    </select>
+    <h4>GPX View panel</h4>
+    <div class ="tableFixHead2"id ="tableFixHead2">
+        <table class="table2"id="table2">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Component</th>
+                <th scope="col">Name</th>
+                <th scope="col">Number of points</th>
+                <th scope="col">Length</th>
+                <th scope="col">Loop</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div><br>
+    <label id = "data" for="otherdata">Choose a track/route to display:</label>
+    <select name="other data" id="otherdata">
+        <option value="temp">--Select Route/Track--</option>
+    </select>
+    <button id = "rename"for="otherdata">Click to Rename</button>
+    <h5>Additional Features</h5>
+    <div style="width: 50%; float:left">
+        <form id ="createGpxForm">
+            <label for="gpxName">The name:</label><br>
+            <input type ="text" id = "gpxName" value =""><br>
+            <label for="gpxCreator">The creator:</label><br>
+            <input type ="text" id = "gpxCreator" value =""><br>
+            <input type="submit" value="Create GPX"id="createGPX">
+        </form>
+    
+        <br>
+     </div>
+     
+     <div style="width: 50%; float:right">
+        <form id ="createRteForm">
+            <label id = "datarte" for="otherdatarte">Choose a file to add a route too:</label>
+            <select name="otherdatarte" id="otherdatarte">
+            <option value="temp">--Select a file--</option>
+            </select><br>
+            <label for="rteName">Route name:</label><br>
+            <input type ="text" id = "rteName" value = ""><br>
+            <label for="rteWay">Number of waypoints:</label><br>
+            <input type ="text" id = "rteWay" value = ""><br>
+            <input type="submit" value="Create Route"id="createRte">
+            <br>
+        </form>
+        <br>
+     </div>
+    <br>
+    <div style="clear:both;"></div>
+    <div style="width: 40%; float:left">
+    <form id = "paths">
+        <label for="slat">Start lat:</label><br>
+        <input type ="text" id = "slat" value = ""><br>
+        <label for="slon">Start lon: </label><br>
+        <input type ="text" id = "slon" value = ""><br>
+        <label for="elat">End lat:</label><br>
+        <input type ="text" id = "elat" value = ""><br>
+        <label for="elon">End lon: </label><br>
+        <input type ="text" id = "elon" value = ""><br>
+        <label for="del">Delta:</label><br>
+        <input type ="text" id = "del" value = ""><br>
+        <input type="submit" value="Find Path"id="fpath">
+    </form>
+    </div>
+    <br>
+    <h5 style="width: 60%; float:right">Path view panel</h5>
+    <div class ="tableFixHead3"id ="tableFixHead3" style="width: 60%; float:right">
+        <table class="table3"id="table3">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Component</th>
+                <th scope="col">Name</th>
+                <th scope="col">Number of points</th>
+                <th scope="col">Length</th>
+                <th scope="col">Loop</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <div style="clear:both;"></div>
+    <h4>------------------------------------DATABASE------------------------------------</h4>
+    <div style="width: 50%; float:left">
+        <form id = "connectDB" style="width: 100%; float:center">
+            <label for="uname">Username:</label><br>
+            <input type ="text" id = "uname" value = ""><br>
+            <label for="pass">Password:</label><br>
+            <input type ="text" id = "pass" value = ""><br>
+            <label for="db">Database:</label><br>
+            <input type ="text" id = "db" value = ""><br>
+            <input type="submit" value="Login"id="dbconnect">
+        </form>
+        <button id = "uploadDB">Store All Files</button><br>
+        <button id = "clearDB">Clear All Data</button><br>
+        <button id = "statDB">Display DB status</button><br>
+        <button id = "logoutDB">Logout</button><br>
+    </div>
+    <div style="width: 50%; float:right">
+        <div>
+            <button id = "querySub">Execute Query</button>
+        </div>
+        <select name="query" id="query">
+            <option value="temp">--Select Query--</option>
+            <option value="printRoutes">Display all Routes</option>
+            <option value="printFileRoutes">Display all file Routes</option>
+            <option value="printRoutePoint">Display all route points</option>
+            <option value="printFilePoint">Display all file points</option>
+            <option value="printNPath">Display N shortest/longest routes</option>
+        </select>
+        <div id = "qmenu">
+            <form>
+                <select id="sort"></select>
+            </form>
+        </div>
+        <div id = "header">
+
+        </div>
+        <div class ="tableFixHead4"id ="tableFixHead4">
+            <table class="table4"id="table4">
+            <thead class="thead-dark">
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+        </div>
+    </div>
+    <!-- Leave me at the bottom of body -->
+    <script src="/index.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
